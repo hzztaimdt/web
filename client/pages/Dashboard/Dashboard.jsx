@@ -1,33 +1,22 @@
-import React, { Component, Suspense } from 'react';
-import PageLoading from '../../components/PageLoading';
+import React, { Component } from 'react';
+import JoinRoom from '../../services/joinRoom';
 
-const DisplayCard = React.lazy(() => import('./components/DisplayCard'));
-const TabChart = React.lazy(() => import('./components/TabChart'));
-const EditableTable = React.lazy(() => import('./components/EditableTable'));
-const LatestActivity = React.lazy(() => import('./components/LatestActivity'));
-const PieDoughnutChart = React.lazy(() =>
-  import('./components/PieDoughnutChart')
-);
+const ROOMTOKEN =
+  'SvZYRC7pTwUz7O-nA0OJFY6-XjtOd4oTzIJTiMq6:Ktu773HHnDTXi9Nb-g9qPSTCLq8=:eyJhcHBJZCI6ImR6bnQ2eHBiciIsInJvb21OYW1lIjoiZmVuZyIsInVzZXJJZCI6IjAwMSIsImV4cGlyZUF0IjoxNTU2NTk0ODQ2LCJwZXJtaXNzaW9uIjoiYWRtaW4ifQ==';
 
 export default class Dashboard extends Component {
+  componentDidMount() {
+    this.joinRoom = new JoinRoom(ROOMTOKEN, this.room);
+    this.start();
+  }
+  start = async () => {
+    await this.joinRoom.joinRoom();
+    this.joinRoom.playVideo();
+  }
   render() {
     return (
       <div className="dashboard-page">
-        <Suspense fallback={<PageLoading />}>
-          <DisplayCard />
-        </Suspense>
-        <Suspense fallback={null}>
-          <TabChart />
-        </Suspense>
-        <Suspense fallback={null}>
-          <LatestActivity />
-        </Suspense>
-        <Suspense fallback={null}>
-          <EditableTable />
-        </Suspense>
-        <Suspense fallback={null}>
-          <PieDoughnutChart />
-        </Suspense>
+        <div ref={el => (this.room = el)} />
       </div>
     );
   }
