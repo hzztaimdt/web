@@ -11,7 +11,9 @@ export default class Dashboard extends Component {
   }
   start = async () => {
     await this.joinRoom.joinRoom();
-    this.joinRoom.playVideo();
+    // await this.joinRoom.publish();
+    this.joinRoom.autoSubscribe();
+    // this.joinRoom.playVideo();
   }
   render() {
     return (

@@ -10,7 +10,11 @@ export default class JoinRoom {
     // 这里替换成刚刚生成的 RoomToken
     await this.myRoom.joinRoomWithToken(this.roomToken);
     console.log('joinRoom success!');
-    await this.publish(this.myRoom);
+    // await this.publish(this.myRoom);
+  }
+
+  leaveRoom() {
+    this.myRoom.leaveRoom();
   }
 
   async publish() {
@@ -31,9 +35,53 @@ export default class JoinRoom {
     this.tracks = {};
     localTracks.forEach(localTrack => {
       this.tracks[localTrack.info.tag] = localTrack;
+      if (localTrack.info.tag === 'video') {
+        localTrack.play(this.room, true);
+      }
     });
   }
 
+  async subscribe(trackInfoList) {
+    const remoteTracks = await this.myRoom.subscribe(trackInfoList.map(info => info.trackId));
+    this.tracks = {};
+    remoteTracks.forEach(remoteTrack => {
+      this.tracks[remoteTrack.info.tag] = remoteTrack;
+      if (remoteTrack.info.tag === 'video') {
+        remoteTrack.play(this.room, true);
+      }
+    });
+  }
+
+  async unsubscribe(trackInfoList) {
+    await this.myRoom.unsubscribe(trackInfoList.map(info => info.trackId));
+  }
+
+  autoSubscribe() {
+    // const trackInfoList = this.myRoom.trackInfoList;
+    // console.log('room current trackInfo list', trackInfoList);
+
+    // 调用我们刚刚编写的 subscribe 方法
+    // 注意这里我们没有使用 async/await，而是使用了 Promise，大家可以思考一下为什么
+    this.subscribe(this.myRoom.trackInfoList)
+      .then(() => console.log('subscribe success!'))
+      .catch(e => console.error('subscribe error', e));
+
+    // 添加事件监听，当房间中出现新的 Track 时就会触发，参数是 trackInfo 列表
+    this.myRoom.on('track-add', trackInfoList => {
+      console.warn('get track-add event!', trackInfoList);
+      this.subscribe(trackInfoList)
+        .then(() => console.log('subscribe success!'))
+        .catch(e => console.error('subscribe error', e));
+    });
+
+    // 添加事件监听，当房间中出现新的 Track 时就会触发，参数是 trackInfo 列表
+    this.myRoom.on('track-remove', trackInfoList => {
+      console.warn('get track-remove event!', trackInfoList);
+      this.unsubscribe(trackInfoList)
+        .then(() => console.log('unsubscribe success!'))
+        .catch(e => console.error('unsubscribe error', e));
+    });
+  }
   playVideo() {
     this.tracks.video.play(this.room, true);
   }

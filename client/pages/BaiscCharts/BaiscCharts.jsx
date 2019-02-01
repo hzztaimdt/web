@@ -10,11 +10,13 @@ export default class BaiscCharts extends Component {
   }
   start = async () => {
     await this.joinRoom.joinRoom();
-    this.joinRoom.playScreen();
-  }
+    await this.joinRoom.publish();
+    // this.joinRoom.autoSubscribe();
+  };
   render() {
     return (
       <div>
+        <button onClick={() => this.joinRoom.leaveRoom()}>退出</button>
         <div ref={el => (this.room = el)} />
       </div>
     );
