@@ -5,6 +5,7 @@ export default class JoinRoom {
     this.roomToken = roomToken;
     this.room = room;
   }
+
   async joinRoom() {
     this.myRoom = new QNRTC.TrackModeSession();
     // 这里替换成刚刚生成的 RoomToken
@@ -17,24 +18,48 @@ export default class JoinRoom {
     this.myRoom.leaveRoom();
   }
 
-  async publish() {
+  async publish(deviceIds) {
+    let audioDeviceId;
+    let videoDeviceId;
+    if (deviceIds && deviceIds.audio) {
+      audioDeviceId = deviceIds.audio;
+    }
+    if (deviceIds && deviceIds.video) {
+      videoDeviceId = deviceIds.video;
+    }
     const params = {
-      audio: { enabled: true, tag: 'audio' },
-      video: { enabled: true, tag: 'video' },
-      screen: { enabled: true, tag: 'screen' },
+      audio: { enabled: true, tag: 'audio', deviceId: audioDeviceId },
+      video: { enabled: true, tag: 'video', deviceId: videoDeviceId },
     };
     const localTracks = await QNRTC.deviceManager.getLocalTracks(params);
     console.log('my local tracks', localTracks);
-    console.log('track 1 tag is', localTracks[0].info.track);
-    console.log('track 2 tag is', localTracks[1].info.track);
-    console.log('track 3 tag is', localTracks[2].info.track);
+    console.log('track 1 tag is', localTracks[0].info.tag);
+    console.log('track 2 tag is', localTracks[1].info.tag);
     // 将刚刚的 Track 列表发布到房间中
     await this.myRoom.publish(localTracks);
     console.log('publish success!');
     // 遍历本地采集的 Track 对象
-    this.tracks = {};
+  }
+
+  getDevices() {
+    const deviceInfo = QNRTC.deviceManager.deviceInfo;
+    console.log('my local devices', deviceInfo);
+    return deviceInfo;
+  }
+
+  async getLocalTracks(params) {
+    const localTracks = await QNRTC.deviceManager.getLocalTracks(params);
+    return localTracks;
+  }
+
+  play(localTracks) {
+    if (this.videoTracks) {
+      Object.values(this.videoTracks).forEach(i => i.release());
+    }
+
+    this.videoTracks = {};
     localTracks.forEach(localTrack => {
-      this.tracks[localTrack.info.tag] = localTrack;
+      this.videoTracks[localTrack.info.tag] = localTrack;
       if (localTrack.info.tag === 'video') {
         localTrack.play(this.room, true);
       }
@@ -81,12 +106,5 @@ export default class JoinRoom {
         .then(() => console.log('unsubscribe success!'))
         .catch(e => console.error('unsubscribe error', e));
     });
-  }
-  playVideo() {
-    this.tracks.video.play(this.room, true);
-  }
-
-  playScreen() {
-    this.tracks.screen.play(this.room, true);
   }
 }
