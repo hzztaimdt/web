@@ -18,27 +18,33 @@ export default class JoinRoom {
     this.myRoom.leaveRoom();
   }
 
-  async publish(deviceIds) {
-    let audioDeviceId;
-    let videoDeviceId;
-    if (deviceIds && deviceIds.audio) {
-      audioDeviceId = deviceIds.audio;
-    }
-    if (deviceIds && deviceIds.video) {
-      videoDeviceId = deviceIds.video;
-    }
-    const params = {
-      audio: { enabled: true, tag: 'audio', deviceId: audioDeviceId },
-      video: { enabled: true, tag: 'video', deviceId: videoDeviceId },
-    };
-    const localTracks = await QNRTC.deviceManager.getLocalTracks(params);
-    console.log('my local tracks', localTracks);
-    console.log('track 1 tag is', localTracks[0].info.tag);
-    console.log('track 2 tag is', localTracks[1].info.tag);
-    // 将刚刚的 Track 列表发布到房间中
+  // async publish(deviceIds) {
+  //   let audioDeviceId;
+  //   let videoDeviceId;
+  //   if (deviceIds && deviceIds.audio) {
+  //     audioDeviceId = deviceIds.audio;
+  //   }
+  //   if (deviceIds && deviceIds.video) {
+  //     videoDeviceId = deviceIds.video;
+  //   }
+  //   const params = {
+  //     audio: { enabled: true, tag: 'audio', deviceId: audioDeviceId },
+  //     video: { enabled: true, tag: 'video', deviceId: videoDeviceId, width: 1920, height: 1080 },
+  //   };
+  //   const localTracks = await QNRTC.deviceManager.getLocalTracks(params);
+  //   console.log('my local tracks', localTracks);
+  //   // 将刚刚的 Track 列表发布到房间中
+  //   await this.myRoom.publish(localTracks);
+  //   // this.play(localTracks);
+  //   console.log('publish success!');
+  //   // 遍历本地采集的 Track 对象
+  // }
+
+  async publish(localTracks) {
     await this.myRoom.publish(localTracks);
-    console.log('publish success!');
-    // 遍历本地采集的 Track 对象
+  }
+  async unpublish(localTracks) {
+    await this.myRoom.unpublish(localTracks.map(track => track.info.trackId));
   }
 
   getDevices() {
@@ -61,7 +67,7 @@ export default class JoinRoom {
     localTracks.forEach(localTrack => {
       this.videoTracks[localTrack.info.tag] = localTrack;
       if (localTrack.info.tag === 'video') {
-        localTrack.play(this.room, true);
+        localTrack.play(this.room);
       }
     });
   }
@@ -72,7 +78,7 @@ export default class JoinRoom {
     remoteTracks.forEach(remoteTrack => {
       this.tracks[remoteTrack.info.tag] = remoteTrack;
       if (remoteTrack.info.tag === 'video') {
-        remoteTrack.play(this.room, true);
+        remoteTrack.play(this.room);
       }
     });
   }
