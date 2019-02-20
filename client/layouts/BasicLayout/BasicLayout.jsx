@@ -80,9 +80,6 @@ export default class BasicLayout extends Component {
             profile={profile}
             handleLogout={userLogout}
           />
-          <div className="setting-theme" onClick={this.settingTheme}>
-            切换主题
-          </div>
           <Layout.Section scrollable>
             <Layout.Aside theme={theme} width="auto">
               <Aside isMobile={isMobile} />

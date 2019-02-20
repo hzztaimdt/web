@@ -26,10 +26,10 @@ import ServerError from './pages/ServerError';
 import Forbidden from './pages/Forbidden';
 
 const routerConfig = [
-  {
-    path: '/portlets/base',
-    component: Portlets,
-  },
+  // {
+  //   path: '/portlets/base',
+  //   component: Portlets,
+  // },
   {
     path: '/dashboard/monitor',
     component: Dashboard,
@@ -42,66 +42,66 @@ const routerConfig = [
     path: '/chart/basic',
     component: BaiscCharts,
   },
-  {
-    path: '/list/basic',
-    component: BasicList,
-  },
-  {
-    path: '/list/card',
-    component: CardList,
-  },
-  {
-    path: '/result/success',
-    component: Result,
-  },
-  {
-    path: '/result/fail',
-    component: Fail,
-  },
-  {
-    path: '/table/basic',
-    component: BasicTable,
-  },
-  {
-    path: '/portlets/terms',
-    component: Terms,
-  },
-  {
-    path: '/table/general',
-    component: GeneralTable,
-  },
-  {
-    path: '/account/profile',
-    component: Profile,
-  },
-  {
-    path: '/account/setting',
-    component: Setting,
-  },
-  {
-    path: '/exception/500',
-    component: ServerError,
-  },
-  {
-    path: '/exception/403',
-    component: Forbidden,
-  },
-  {
-    path: '/exception/204',
-    component: Empty,
-  },
-  {
-    path: '/exception/404',
-    component: NotFound,
-  },
-  {
-    path: '/user/login',
-    component: UserLogin,
-  },
-  {
-    path: '/user/register',
-    component: UserRegister,
-  },
+  // {
+  //   path: '/list/basic',
+  //   component: BasicList,
+  // },
+  // {
+  //   path: '/list/card',
+  //   component: CardList,
+  // },
+  // {
+  //   path: '/result/success',
+  //   component: Result,
+  // },
+  // {
+  //   path: '/result/fail',
+  //   component: Fail,
+  // },
+  // {
+  //   path: '/table/basic',
+  //   component: BasicTable,
+  // },
+  // {
+  //   path: '/portlets/terms',
+  //   component: Terms,
+  // },
+  // {
+  //   path: '/table/general',
+  //   component: GeneralTable,
+  // },
+  // {
+  //   path: '/account/profile',
+  //   component: Profile,
+  // },
+  // {
+  //   path: '/account/setting',
+  //   component: Setting,
+  // },
+  // {
+  //   path: '/exception/500',
+  //   component: ServerError,
+  // },
+  // {
+  //   path: '/exception/403',
+  //   component: Forbidden,
+  // },
+  // {
+  //   path: '/exception/204',
+  //   component: Empty,
+  // },
+  // {
+  //   path: '/exception/404',
+  //   component: NotFound,
+  // },
+  // {
+  //   path: '/user/login',
+  //   component: UserLogin,
+  // },
+  // {
+  //   path: '/user/register',
+  //   component: UserRegister,
+  // },
 ];
 
 const routerData = getRouterData(routerConfig, asideMenuConfig);

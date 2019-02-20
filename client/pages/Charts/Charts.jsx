@@ -1,26 +1,15 @@
 import React, { Component } from 'react';
-import OverviewChartCard from './components/OverviewChartCard';
-import TabChart from './components/TabChart';
-import ProjectStatus from './components/ProjectStatus';
-import OrderStatusChart from './components/OrderStatusChart';
 import './Charts.scss';
 
+import VideoPage from '../../components/VideoPage';
+
+const ROOMTOKEN =
+  'SvZYRC7pTwUz7O-nA0OJFY6-XjtOd4oTzIJTiMq6:Ktu773HHnDTXi9Nb-g9qPSTCLq8=:eyJhcHBJZCI6ImR6bnQ2eHBiciIsInJvb21OYW1lIjoiZmVuZyIsInVzZXJJZCI6IjAwMSIsImV4cGlyZUF0IjoxNTU2NTk0ODQ2LCJwZXJtaXNzaW9uIjoiYWRtaW4ifQ==';
+
 export default class Charts extends Component {
-  static displayName = 'Charts';
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     return (
-      <div className="charts-page">
-        <OverviewChartCard />
-        <TabChart />
-        <ProjectStatus />
-        <OrderStatusChart />
-      </div>
+      <VideoPage roomToken={ROOMTOKEN} />
     );
   }
 }

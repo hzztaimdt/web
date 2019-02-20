@@ -77,9 +77,9 @@ export default class JoinRoom {
     this.tracks = {};
     remoteTracks.forEach(remoteTrack => {
       this.tracks[remoteTrack.info.tag] = remoteTrack;
-      if (remoteTrack.info.tag === 'video') {
-        remoteTrack.play(this.room);
-      }
+      // if (remoteTrack.info.tag === 'video') {
+      remoteTrack.play(this.room);
+      // }
     });
   }
 

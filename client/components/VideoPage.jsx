@@ -45,7 +45,7 @@ class VideoPage extends Component {
     this.play(currentVideo);
   }
 
-  onChange = value =>  {
+  onChange = value => {
     this.setState({
       currentVideo: value,
     });
@@ -55,6 +55,7 @@ class VideoPage extends Component {
   async play(deviceId) {
     const params = {
       video: { enabled: true, tag: 'video', deviceId },
+      audio: { enabled: true, tag: 'audio' },
     };
     if (this.localTracks) {
       await this.joinRoom.unpublish(this.localTracks);

@@ -32,116 +32,116 @@ const asideMenuConfig = [
     ],
   },
   {
-    name: '图表页',
+    name: '画面页',
     path: '/chart',
     icon: 'chart1',
     children: [
       {
-        name: '基础图表',
+        name: '画面1',
         path: '/chart/basic',
       },
       {
-        name: '通用图表',
+        name: '画面2',
         path: '/chart/general',
       },
     ],
   },
-  {
-    name: '表格页',
-    path: '/table',
-    icon: 'table',
-    children: [
-      {
-        name: '基础表格',
-        path: '/table/basic',
-        // authority: 'admin',
-      },
-      {
-        name: '通用表格',
-        path: '/table/general',
-        // authority: 'user',
-      },
-    ],
-  },
-  {
-    name: '列表页',
-    path: '/list',
-    icon: 'ul-list',
-    children: [
-      {
-        name: '基础列表',
-        path: '/list/basic',
-      },
-      {
-        name: '卡片列表',
-        path: '/list/card',
-      },
-    ],
-  },
-  {
-    name: '内容页',
-    path: '/portlets',
-    icon: 'publish',
-    children: [
-      {
-        name: '基础详情页',
-        path: '/portlets/base',
-      },
-      {
-        name: '条款协议页',
-        path: '/portlets/terms',
-      },
-    ],
-  },
-  {
-    name: '结果页',
-    path: '/result',
-    icon: 'result',
-    children: [
-      {
-        name: '成功',
-        path: '/result/success',
-      },
-      {
-        name: '失败',
-        path: '/result/fail',
-      },
-    ],
-  },
-  {
-    name: '个人页',
-    path: '/account',
-    icon: 'yonghu',
-    children: [
-      {
-        name: '个人设置',
-        path: '/account/setting',
-      },
-    ],
-  },
-  {
-    name: '异常页',
-    path: '/exception',
-    icon: 'gaojingxinxi',
-    children: [
-      {
-        name: '204',
-        path: '/exception/204',
-      },
-      {
-        name: '403',
-        path: '/exception/403',
-      },
-      {
-        name: '404',
-        path: '/exception/404',
-      },
-      {
-        name: '500',
-        path: '/exception/500',
-      },
-    ],
-  },
+  // {
+  //   name: '表格页',
+  //   path: '/table',
+  //   icon: 'table',
+  //   children: [
+  //     {
+  //       name: '基础表格',
+  //       path: '/table/basic',
+  //       // authority: 'admin',
+  //     },
+  //     {
+  //       name: '通用表格',
+  //       path: '/table/general',
+  //       // authority: 'user',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: '列表页',
+  //   path: '/list',
+  //   icon: 'ul-list',
+  //   children: [
+  //     {
+  //       name: '基础列表',
+  //       path: '/list/basic',
+  //     },
+  //     {
+  //       name: '卡片列表',
+  //       path: '/list/card',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: '内容页',
+  //   path: '/portlets',
+  //   icon: 'publish',
+  //   children: [
+  //     {
+  //       name: '基础详情页',
+  //       path: '/portlets/base',
+  //     },
+  //     {
+  //       name: '条款协议页',
+  //       path: '/portlets/terms',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: '结果页',
+  //   path: '/result',
+  //   icon: 'result',
+  //   children: [
+  //     {
+  //       name: '成功',
+  //       path: '/result/success',
+  //     },
+  //     {
+  //       name: '失败',
+  //       path: '/result/fail',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: '个人页',
+  //   path: '/account',
+  //   icon: 'yonghu',
+  //   children: [
+  //     {
+  //       name: '个人设置',
+  //       path: '/account/setting',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: '异常页',
+  //   path: '/exception',
+  //   icon: 'gaojingxinxi',
+  //   children: [
+  //     {
+  //       name: '204',
+  //       path: '/exception/204',
+  //     },
+  //     {
+  //       name: '403',
+  //       path: '/exception/403',
+  //     },
+  //     {
+  //       name: '404',
+  //       path: '/exception/404',
+  //     },
+  //     {
+  //       name: '500',
+  //       path: '/exception/500',
+  //     },
+  //   ],
+  // },
 ];
 
 export { headerMenuConfig, asideMenuConfig };

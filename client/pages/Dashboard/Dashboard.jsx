@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import VideoPage from '../../components/VideoPage';
-
-const ROOMTOKEN =
-  'SvZYRC7pTwUz7O-nA0OJFY6-XjtOd4oTzIJTiMq6:Ktu773HHnDTXi9Nb-g9qPSTCLq8=:eyJhcHBJZCI6ImR6bnQ2eHBiciIsInJvb21OYW1lIjoiZmVuZyIsInVzZXJJZCI6IjAwMSIsImV4cGlyZUF0IjoxNTU2NTk0ODQ2LCJwZXJtaXNzaW9uIjoiYWRtaW4ifQ==';
+import { Link } from 'react-router-dom';
+import { Button } from '@alifd/next';
 
 export default class Dashboard extends Component {
   render() {
     return (
-      <VideoPage roomToken={ROOMTOKEN} />
+      <div>
+        <Link to="/chart/basic">
+          <Button>画面1</Button>
+        </Link>
+        <Link to="/chart/general">
+          <Button>画面2</Button>
+        </Link>
+      </div>
     );
   }
 }
