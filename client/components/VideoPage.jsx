@@ -17,6 +17,10 @@ class VideoPage extends Component {
     this.start();
   }
 
+  componentWillUnmount() {
+    this.release();
+  }
+
   start = async () => {
     this.joinRoom = new JoinRoom(this.roomToken, this.room);
     await this.joinRoom.joinRoom();
@@ -40,9 +44,9 @@ class VideoPage extends Component {
     let currentVideo = this.state.currentVideo;
     if (videoSource.length > 0) {
       currentVideo = videoSource[this.firstIndex].value;
+      this.setState({ deviceInfo: videoSource, currentVideo });
+      this.play(currentVideo);
     }
-    this.setState({ deviceInfo: videoSource, currentVideo });
-    this.play(currentVideo);
   }
 
   onChange = value => {
@@ -54,7 +58,7 @@ class VideoPage extends Component {
 
   async play(deviceId) {
     const params = {
-      video: { enabled: true, tag: 'video', deviceId },
+      video: { enabled: true, tag: 'video', deviceId, width: 1280, height: 720 },
       audio: { enabled: true, tag: 'audio' },
     };
     if (this.localTracks) {
@@ -65,15 +69,21 @@ class VideoPage extends Component {
     await this.joinRoom.publish(this.localTracks);
   }
 
+  release() {
+    // 里开页面时释放音视频轨
+    if (this.localTracks) {
+      Object.values(this.localTracks).forEach(i => i.release());
+      this.joinRoom.unpublish(this.localTracks);
+    }
+  }
+
   render() {
     const { deviceInfo, currentVideo } = this.state;
     return (
       <div className="dashboard-page">
-        <Select
-          onChange={this.onChange}
-          value={currentVideo}
-          dataSource={deviceInfo}
-        />
+        {deviceInfo.length > 0 ? (
+          <Select onChange={this.onChange} value={currentVideo} dataSource={deviceInfo} />
+        ) : null}
         <div ref={el => (this.room = el)} />
       </div>
     );

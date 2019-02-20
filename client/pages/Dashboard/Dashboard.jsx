@@ -7,8 +7,10 @@ export default class Dashboard extends Component {
     return (
       <div>
         <Link to="/chart/basic">
-          <Button>画面1</Button>
+          <Button type="normal">画面1</Button>
         </Link>
+        <br />
+        <br />
         <Link to="/chart/general">
           <Button>画面2</Button>
         </Link>
