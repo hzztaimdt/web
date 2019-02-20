@@ -84,7 +84,7 @@ export default class JoinRoom {
   }
 
   async unsubscribe(trackInfoList) {
-    trackInfoList.forEach(i => i.release());
+    // trackInfoList.forEach(i => i.release());
     await this.myRoom.unsubscribe(trackInfoList.map(info => info.trackId));
   }
 
