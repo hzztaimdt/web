@@ -72,6 +72,7 @@ class VideoPage extends Component {
   release() {
     // 里开页面时释放音视频轨
     if (this.localTracks) {
+      Object.values(this.localTracks).forEach(i => i.release());
       this.joinRoom.unpublish(this.localTracks);
     }
   }
