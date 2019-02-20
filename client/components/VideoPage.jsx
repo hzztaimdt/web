@@ -84,7 +84,7 @@ class VideoPage extends Component {
         {deviceInfo.length > 0 ? (
           <Select onChange={this.onChange} value={currentVideo} dataSource={deviceInfo} />
         ) : null}
-        <div ref={el => (this.room = el)} />
+        <div ref={el => (this.room = el)} style={{ display: 'flex' }} />
       </div>
     );
   }

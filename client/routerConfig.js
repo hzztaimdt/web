@@ -35,6 +35,10 @@ const routerConfig = [
     component: Dashboard,
   },
   {
+    path: '/role/:token',
+    component: BaiscCharts,
+  },
+  {
     path: '/chart/general',
     component: Charts,
   },
